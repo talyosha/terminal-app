@@ -1,6 +1,6 @@
 import io from 'socket.io-client';
 
-const ENDPOINT = 'localhost:3003';
+const ENDPOINT = 'localhost:3017';
 const socket = io(ENDPOINT);
 
 export const joinSocket = (authData) => {
