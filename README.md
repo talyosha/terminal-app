@@ -1,4 +1,4 @@
-This terminal was created following Simplas task requirement.
+This terminal was created following Simpals task requirement.
 
 ## Run terminal for check result
 
