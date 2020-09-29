@@ -1,0 +1,55 @@
+@mixin theme-style($key, $value) {
+  @each $theme-name, $theme-color in $themes {
+    .#{$theme-name} & {
+      #{$key}: map_get(map_get($themes, $theme-name), $value)
+    }
+  }
+}
+
+p {
+  color: rgba(215,0,16,0.1);
+}
+
+
+$themes: (
+  light: (
+    background-color: #FEFFFF	,
+    color: #000000,
+    second-color: #4F5B66,
+    third-color: #5fb3b3,
+    fourth-color: rgba(56,63,65,0.89),
+    five: #FDFFFF,
+    font-size: 18px,
+    font-family: #{'Inconsolata', monospace},
+  ),
+  dark: (
+    background-color: #000000	,
+    color: #F0FFFF,
+    second-color: #FFC0CB,
+    third-color: #8B4513,
+    fourth-color: #F4A460,
+    five: #000029,
+    font-size: 20px,
+    font-family: #{'Inconsolata', italic},
+  ),
+  hero: (
+    background-color: #2E8B57,
+    color: #4B0082,
+    second-color: #4F5B66,
+    third-color: #3B4559,
+    fourth-color: #F4A460,
+    five: #5E8B57,
+    font-size: 18px,
+    font-family: #{'Arial', serif},
+  ),
+  simpals: (
+    background-color: #EFEF0F,
+    color: #F22B00,
+    second-color: #A1C742,
+    third-color: #444444,
+    fourth-color: rgba(26,0,36,0.78),
+    five: #F7CA00,
+    font-size: 18px,
+    font-family: #{'Inconsolata', monospace},
+  )
+)

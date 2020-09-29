@@ -1,0 +1,177 @@
+@import './vars';
+
+body {
+  margin: 0;
+}
+
+#terminal-wrapper {
+  @include theme-style('background-color', 'background-color');
+  @include theme-style('font-color', 'font-color');
+  @include theme-style('font-family', 'font-family');
+  @include theme-style('font-size', 'font-size');
+  box-sizing: content-box;
+  height: 97vh;
+  overflow: auto;
+
+  .input-container {
+    padding: 1rem;
+
+    form {
+      display: flex;
+
+      input {
+        background: none;
+        border: none;
+        outline: none;
+        -webkit-appearance: none;
+        @include theme-style('color', 'color');
+        @include theme-style('font-size', 'font-size');
+
+
+        flex-grow: 100;
+        margin: 0 10px;
+      }
+
+      .input-promt {
+        @include theme-style('color', 'second-color');
+      }
+    }
+  }
+
+  .path, .input-prompt {
+    @include theme-style('color', 'third-color');
+  }
+
+  .history-container {
+
+    & > ul > li > .input-container {
+      padding-bottom: 0;
+    }
+
+    p.command-result {
+      @include theme-style('color', 'fourth-color');
+      padding-left: 1rem;
+      margin: 0.4rem 0;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul.terminal-ls-list {
+      margin: 10px 0 0 10px;
+
+      li {
+        display: flex;
+        align-items: center;
+
+        svg {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.theme-colors {
+  @include theme-style('background-color', 'five');
+  width: 280px;
+  position: fixed;
+  z-index: 1030;
+  top: 50%;
+  right: 0;
+  @include theme-style('--shadow-color', 'color');
+  box-shadow: 0 1px 15px var(--shadow-color), 0 1px 5px var(--shadow-color);
+  -webkit-transform: translate(280px, -50%);
+  transform: translate(280px, -50%);
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  &.shown {
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+  }
+
+  > div {
+    padding: 1.2rem;
+
+    .color-choose {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .theme-color {
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        border-radius: 20px;
+        cursor: pointer;
+        -webkit-transition: background 0.25s;
+        transition: background 0.25s;
+        border: 3px solid;
+
+
+        &.light {
+          border-color: map_get(map_get($themes, 'light'), 'background-color');
+          background: map_get(map_get($themes, 'light'), 'background-color');
+        }
+
+        &.dark {
+          border-color: map_get(map_get($themes, 'dark'), 'background-color');
+          background: map_get(map_get($themes, 'dark'), 'background-color');
+        }
+
+        &.hero {
+          border-color: map_get(map_get($themes, 'hero'), 'background-color');
+          background: map_get(map_get($themes, 'hero'), 'background-color');
+        }
+
+        &.simpals {
+          border-color: map_get(map_get($themes, 'simpals'), 'color');
+          background: map_get(map_get($themes, 'simpals'), 'color');
+        }
+
+        &.active {
+          background: white;
+        }
+      }
+
+      > p {
+        @include theme-style('color', 'color');
+        padding: 0 0.5rem;
+      }
+    }
+  }
+
+  .theme-button {
+    position: absolute;
+    left: -100px;
+    cursor: pointer;
+    @include theme-style('background-color', 'five');
+    background: url("/logo.svg") no-repeat center;
+    padding: 13px 7px 13px 7px;
+    border-radius: 0.2rem;
+    @include theme-style('--shadow-color', 'color');
+    box-shadow: -10px 1px 32px var(--shadow-color);
+    font-size: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: contain;
+    width: 100px;
+    height: 27px;
+    z-index: 100;
+  }
+}
+
+.error {
+  padding: 0 1rem;
+  color: rgba(161, 15, 34, 0.82);
+  font-size: 2rem;
+  font-weight: bolder;
+  font-family: cursive;
+}

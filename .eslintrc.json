@@ -1,0 +1,216 @@
+{
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb",
+        "prettier",
+        "plugin:require-path-exists/recommended",
+        "plugin:prettier/recommended",
+        "prettier/flowtype",
+        "prettier/react",
+        "prettier/standard"
+    ],
+    "plugins": [
+        "react",
+        "prettier",
+        "jsx-a11y",
+        "import",
+        "require-path-exists"
+    ],
+    "rules": {
+        "consistent-return": "off",
+        "no-unused-vars": "warn",
+        "no-return-assign": "off",
+        "no-plusplus": "off",
+        "no-restricted-syntax": "warn",
+        "guard-for-in": "warn",
+        "global-require": "off",
+        "no-shadow": "warn",
+        "import/no-named-default": "off",
+        "import/no-named-as-default": "off",
+        "camelcase": "warn",
+        "no-param-reassign": "off",
+        "no-return-await": "warn",
+        "no-case-declarations": "off",
+        "prefer-promise-reject-errors": "warn",
+        "no-alert": "warn",
+        "prefer-rest-params": "off",
+        "no-use-before-define": "off",
+        "no-empty": "off",
+        "max-classes-per-file": "off",
+        "no-bitwise": "off",
+        "no-unused-expressions": "warn",
+        "no-useless-constructor": "warn",
+        "no-useless-concat": "warn",
+        "no-nested-ternary": "warn",
+        "no-undef": "off",
+        "array-callback-return": "warn",
+        "no-restricted-properties": "warn",
+        "prefer-destructuring": "warn",
+        "eqeqeq": "warn",
+        "prefer-const": "warn",
+        /* Enable Prettier reports as eslint errors */
+        "prettier/prettier": [
+            "warn",
+            {
+                "singleQuote": true,
+                "parser": "flow",
+                "endOfLine": "auto",
+                "tabWidth": 2,
+                "semi": true,
+                "printWidth": 120
+            },
+            {
+                "fileInfoOptions": {
+                    "withNodeModules": true
+                }
+            }
+        ],
+        /* Skip `radix` for `parseInt` */
+        "radix": "off",
+        /* Turn offs  */
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "import/no-extraneous-dependencies": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "jsx-a11y/label-has-for": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "react/button-has-type": "off",
+        "react/prop-types": "warn",
+        "react/require-extension": "off",
+        "react/jsx-space-before-closing": "off",
+        "react/jsx-wrap-multilines": "off",
+        "react/no-unescaped-entities": "off",
+        "jsx-a11y/href-no-hash": "off",
+        "jsx-a11y/img-redundant-alt": "warn",
+        "jsx-a11y/label-has-associated-control": "warn",
+        "jsx-a11y/media-has-caption": "warn",
+        "jsx-a11y/anchor-is-valid": [
+            "warn",
+            {
+                "aspects": [
+                    "invalidHref"
+                ]
+            }
+        ],
+        "no-restricted-globals": "off",
+        "no-prototype-builtins": "off",
+        "no-underscore-dangle": "off",
+        "space-before-function-paren": "off",
+        "class-methods-use-this": "off",
+        "default-case": "off",
+        /* React */
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/no-unused-prop-types": [
+            "warn",
+            {
+                "skipShapeProps": true
+            }
+        ],
+        "react/no-unused-state": "warn",
+        "react/no-access-state-in-setstate": "warn",
+        "react/prefer-stateless-function": "off",
+        "react/no-array-index-key": "off",
+        "react/destructuring-assignment": [
+            "off",
+            "always"
+        ],
+        "react/require-default-props": "off",
+        "react/sort-comp": "off",
+        "react/no-find-dom-node": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/static-property-placement": "warn",
+        "react/default-props-match-prop-types": "warn",
+        "react/forbid-prop-types": "warn",
+        "react/state-in-constructor": "warn",
+        "react/jsx-no-undef": "warn",
+        "react/jsx-no-bind": "warn",
+        /* Imports */
+        "import/named": [
+            "warn"
+        ],
+        "import/export": [
+            "warn"
+        ],
+        "import/default": [
+            "warn"
+        ],
+        "import/namespace": [
+            "error",
+            {
+                "allowComputed": true
+            }
+        ],
+        "import/extensions": [
+            "error",
+            {
+                "json": "always",
+                "less": "always",
+                "tsx": "never",
+                "ts": "never",
+                "js": "never",
+                "jsx": "never"
+            }
+        ],
+        "import/order": [
+            "warn",
+            {
+                "groups": [
+                    "builtin",
+                    "external"
+                ]
+            }
+        ],
+        "quotes": [
+            2,
+            "single",
+            "avoid-escape"
+        ],
+        "import/newline-after-import": [
+            "error"
+        ],
+        "require-path-exists/exists": "off",
+        /* Debug related */
+        "no-debugger": [
+            "error"
+        ],
+        /* Lines & spacing */
+        "newline-after-var": [
+            "error",
+            "always"
+        ],
+        "newline-before-return": [
+            "error"
+        ],
+        "linebreak-style": "off"
+    },
+    "settings": {
+        "import/extensions": [
+            ".js",
+            ".jsx"
+        ],
+        "react": {
+            "createClass": "createReactClass",
+            "pragma": "React",
+            "version": "detect",
+            // It will default to "detect" in the future
+            "flowVersion": "1.0"
+        }
+    }
+}
