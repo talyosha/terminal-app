@@ -7,13 +7,18 @@ const ColorPalette = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
+  const addEvents = () =>
+    ['click', 'touchstart'].forEach((event) => document.addEventListener(event, handleDocumentClick, true));
+  const removeEvents = () =>
+    ['click', 'touchstart'].forEach((event) => document.removeEventListener(event, handleDocumentClick, true));
+
   useEffect(() => {
     if (isOpen) {
       addEvents();
     }
 
     return () => removeEvents();
-  }, [isOpen]);
+  }, [isOpen, addEvents]);
 
   const toggle = () => setIsOpen(!isOpen);
   const handleDocumentClick = (e) => (containerRef && containerRef.current.contains(e.target) ? null : toggle());
@@ -22,11 +27,6 @@ const ColorPalette = (props) => {
     setTheme(color);
     toggle();
   };
-
-  const addEvents = () =>
-    ['click', 'touchstart'].forEach((event) => document.addEventListener(event, handleDocumentClick, true));
-  const removeEvents = () =>
-    ['click', 'touchstart'].forEach((event) => document.removeEventListener(event, handleDocumentClick, true));
 
   return (
     <div ref={containerRef} className={`theme-colors ${isOpen ? 'shown' : ''}`}>

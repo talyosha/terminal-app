@@ -4,7 +4,7 @@ import History from './History';
 import Input from '../inputs/Input';
 import '../../assets/scss/Terminal.scss';
 import { disconnectSocket, listenSocket, sendCommand } from '../../socket';
-import { COMMAND_RESULT_ERROR, COMMAND_RESULT_NOTHING, COMMAND_RESULT_WAIT } from '../../helpers/constants';
+import { COMMAND_RESULT_NOTHING, COMMAND_RESULT_WAIT } from '../../helpers/constants';
 import InputScrollWrapper from '../inputs/InputWrapper';
 
 class Terminal extends PureComponent {
@@ -22,38 +22,23 @@ class Terminal extends PureComponent {
   }
 
   componentDidMount() {
-    listenSocket('response', ({ result, id }) => {
-      console.log('SOCKET RESPONSE', result, id);
-
-      this.setState((prev) => ({
-        history: prev.history.map((item) =>
-          item.id === id
-            ? { ...item, result: item.result === COMMAND_RESULT_WAIT ? result : item.result + result }
-            : item
-        ),
-      }));
-    });
+    listenSocket('response', ({ result, id }) => this.setResult(result, id));
+    listenSocket('errorResponse', ({ error, id }) => this.setResult(error, id));
 
     listenSocket('path', ({ path }) => {
       this.setState({
         currentPath: path,
       });
     });
-
-    listenSocket('errorResponse', ({ error, id }) => {
-      this.setState((prev) => ({
-        history: prev.history.map((item) =>
-          item.id === id
-            ? {
-                ...item,
-                result: COMMAND_RESULT_ERROR,
-                error: item.error ? item.error + error : error,
-              }
-            : item
-        ),
-      }));
-    });
   }
+
+  setResult = (result, id) => {
+    this.setState((prev) => ({
+      history: prev.history.map((item) =>
+        item.id === id ? { ...item, result: item.result === COMMAND_RESULT_WAIT ? result : item.result + result } : item
+      ),
+    }));
+  };
 
   componentWillUnmount() {
     disconnectSocket();
@@ -132,6 +117,7 @@ class Terminal extends PureComponent {
         this.clearViewHistory();
         this.saveCommandToHistory(trimmedValue);
         break;
+
       case 'exit':
         exit();
         break;
@@ -146,6 +132,7 @@ class Terminal extends PureComponent {
         this.saveCommandToHistory(trimmedValue);
         this.goToNextLine(commandResult);
         this.sendCommandToServer(currentPath, trimmedValue, currentCommandId);
+        break;
     }
   };
 
@@ -165,25 +152,20 @@ class Terminal extends PureComponent {
   sendCommandToServer = (path, message, id) => sendCommand({ path, message, id });
 
   goToNextLine = (result) => {
-    this.setState(
-      (prev) => {
-        return {
-          currentCommandId: prev.currentCommandId + 1,
-          history: [
-            ...prev.history,
-            {
-              path: prev.currentPath,
-              id: prev.currentCommandId,
-              result,
-              value: prev.value,
-              error: false,
-            },
-          ],
-          value: '',
-        };
-      },
-      () => console.log('STATE', this.state)
-    );
+    this.setState((prev) => ({
+      currentCommandId: prev.currentCommandId + 1,
+      history: [
+        ...prev.history,
+        {
+          path: prev.currentPath,
+          id: prev.currentCommandId,
+          result,
+          value: prev.value,
+          error: false,
+        },
+      ],
+      value: '',
+    }));
   };
 
   render() {

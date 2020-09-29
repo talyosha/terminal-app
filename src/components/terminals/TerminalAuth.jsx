@@ -3,6 +3,7 @@ import Terminal from './Terminal';
 import Input from '../inputs/Input';
 import { disconnectSocket, joinSocket, listenSocket } from '../../socket';
 import defaultAuthQuestions from '../../helpers/default-auth-questions';
+import { messages } from '../../helpers/constants';
 
 class TerminalAuth extends PureComponent {
   constructor(props) {
@@ -11,7 +12,6 @@ class TerminalAuth extends PureComponent {
     this.state = {
       readOnly: false,
       authenticated: false,
-      ready: false,
       error: false,
       questionHistory: defaultAuthQuestions,
       value: '',
@@ -21,26 +21,21 @@ class TerminalAuth extends PureComponent {
 
   componentDidMount() {
     listenSocket('ready', () => {
-      console.log('THIS ___', this);
-
       this.setState({
-        ready: true,
         authenticated: true,
       });
     });
 
     listenSocket('end', () => {
       this.setState({
-        ready: false,
         authenticated: false,
       });
     });
 
     listenSocket('authError', () => {
       this.setState({
-        ready: false,
         authenticated: false,
-        error: 'Este imosibil de efectuat conexiune SSH cu datele prestate. Controlatile si inccercati din Nou',
+        error: messages.authError,
         questionHistory: defaultAuthQuestions,
         value: '',
         questionIndex: 0,
@@ -87,13 +82,12 @@ class TerminalAuth extends PureComponent {
       {}
     );
 
-    console.log('AUTH DATA', authData);
     joinSocket(authData);
 
     this.setState({
       readOnly: true,
       value: '',
-      questionHistory: [{ question: 'Asteptati va rog autentificare ...' }],
+      questionHistory: [{ question: messages.waitAuth }],
       questionIndex: 0,
       error: false,
     });

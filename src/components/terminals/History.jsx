@@ -36,7 +36,7 @@ const CommandResult = (props) => {
 
 CommandResult.propTypes = {
   result: PropTypes.string,
-  error: PropTypes.string,
+  error: PropTypes.bool,
 };
 
 const OneHistoryItem = (props) => {
@@ -55,7 +55,7 @@ OneHistoryItem.propTypes = {
     path: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     result: PropTypes.string.isRequired,
-    error: PropTypes.string.isRequired,
+    error: PropTypes.bool,
   }),
 };
 
